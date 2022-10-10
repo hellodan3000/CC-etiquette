@@ -290,3 +290,66 @@ ggplot()+geom_hline(yintercept=0,linetype="dotted",colour="darkgrey")+
           axis.text = element_text(size=16),
           panel.grid.minor = element_blank(),
           panel.grid.major = element_blank()))
+
+
+# Section 3 - Tidying up old scripts and data frames ----
+
+# Adding spaces cheat ----
+
+# Reformat your old code to add in spaces and limit line length
+install.packages("formatR")
+library("formatR")
+
+# Set working directory to wherever your messy script is
+tidy_source("messy_script_2017-02-25.R", file = "tidy_script_2017-02-25.R", width.cutoff = 100)
+# If you don't specify file = "new_script.R", your script will get overwritten, dangerous!
+# If you don't specify a width cutoff point, tidy_source just adds in the spaces
+# 100 characters seems like a reasonable cutoff point
+
+# Reformat all the scripts in a directory
+# Set your working directory to wherever your messy scripts are
+
+# IMPORTANT this will override script files, so make a duplicate back up folder, in case tidy_dir messes up
+tidy_dir(path="whatever/your/path/is", recursive = TRUE)
+# recursive	- whether to look for R scripts in subdirectories of the directory specified under path
+
+
+
+# Renaming old objects and variables ----
+
+# You can find and Replace words/object names in the R Script window
+
+# You can use the following code to replace variable names in dataframes
+
+
+names(dataframe) <- gsub(".", "_", names(dataframe), fixed = TRUE)
+# This code takes all of the variable names in the imaginary dataset `dataframe` and replaces `.` with `_`
+# Depending on the naming style you are using, you might want to go the other way around and use `.` in all variable names
+
+names(dataframe) <- tolower(names(dataframe))
+# This code makes all of the variable names in the imaginary dataset lowercase
+
+colnames(dataframe)[colnames(dataframe) == 'Old_Complicated_Name'] <- 'new.simple.name'
+# Renaming an individual column in the imaginary dataset
+
+
+# RStudio addins ----
+
+# These add some functionality to RStudio using point and click menus
+
+install.packages('addinslist') # I need to run this again and restart T think???
+
+# Add boxes around introductory sections without having to type loads of hashes
+
+# Insert a box around the introductory section of your script
+install.packages("devtools")
+devtools::install_github("ThinkRstat/littleboxes")
+
+# Afterwards select your introductory comments, click on Addins/ Little boxes and the box appears!
+# Note that if you are also reformatting your code using formatR, reformat the code first, then add the box.
+# formatR messes up these boxes otherwise!
+
+
+
+
+
